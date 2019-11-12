@@ -1,0 +1,303 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <!DOCTYPE html>
+<html>
+<title>이화여자대학교 수강신청</title>
+  <head>
+    <title>(N4)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" id="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="imagetoolbar" content="no">
+    <meta HTTP-EQUIV="Expires" CONTENT="0">
+    <meta HTTP-EQUIV=Pragma CONTENT=no-cache>
+    <style>.font_red { color: #cc0000; font-weight: bold; }
+      .login_right h2 {font-size:22px; padding:0 0 14px 0; border-bottom:1px solid #e1e8ef; color:#2e2d2c; text-align:center; font-family:'hufs_L'; font-weight:bold }
+      .season_service_in p span {display:block;font-weight:normal;font-size: 15px;}</style>
+
+  </head>
+  <body onContextmenu="return false" style="background-color:#e6e7e4" onKeyDown="keypressed()">
+    <!-- div login_page -->
+    <div class="login_page">
+      <!-- div login_top -->
+      <div class="login_top">
+        <h1>
+          <a href="http://www.ewhatest.ac.kr" target="_blank">
+            <img src="D:\7조\이화로고.jpg" alt="종합정보시스템">
+          </a>
+        </h1>
+        <ul>
+          <!-- <li><a href="/src08/jsp/lecture/LECTURE3020L_frame.jsp" target="body">강의계획서</a></li> -->
+          <!-- <li><a href="/src08/jsp/lecture/LECTURE2020L.jsp" target="body">강의시간표</a></li> -->
+          <!-- <li><a href="http://webmail.hufs.ac.kr" target="_blank">웹메일</a></li> -->
+          <!-- <li><a href="http://eclass.hufs.ac.kr/" target="_blank">e-Class</a></li> -->
+        </ul>
+      </div>
+      <!-- /div login_top -->
+      <!-- 개강일 안내 --
+      <center><br><img style="height:55px; width:700px" src="http://builder.hufs.ac.kr/user/hufs/sugang_intro/180205/soti.gif" alt="한국외국어대학교"></center>
+      -- /개강일 안내 -->
+      <!-- form -->
+      <form name="form1" method="post">
+        <!-- div login_wrap -->
+        <div class="login_wrap">
+          <!-- div -->
+          <div>
+            <!-- 수강신청/변경 일정 -->
+            <div class="season_service" style="height:320px">
+              <h2></h2>
+              <div class="season_service_in">
+                <p>
+                  <span>: 10:00 ~
+                    <font class="font_red">16:00</font>
+                  </span>
+                </p>
+                <div class="table">
+                  <table>
+                    <caption>,</caption>
+                    <!--
+                    <colgroup>
+                    <col width="48%" />
+                    <col width="52%" />
+                    </colgroup>
+                    -->
+                    <!--
+                    <tbody>
+                    <tr>
+                    <th>4학년</th>
+                    <td align="left">08.05(월)</td>
+                    </tr>
+                    <tr>
+                    <th>3학년</th>
+                    <td align="left">08.06(화)</td>
+                    </tr>
+                    <tr>
+                    <th>2학년</th>
+                    <td align="left">08.07(수)</td>
+                    </tr>
+                    <tr>
+                    <th>1학년</th>
+                    <td align="left">08.08(목)</td>
+                    </tr>
+                    <tr>
+                    <th>전학년</th>
+                    <td align="left">08.09(금)</td>
+                    </tr>
+                    </tbody>
+                    -->
+                    <tbody>
+                      <tr>
+                        <th>(전학년)</th>
+                        <td align="left">2.15(월) ~ 2.19(금)</td>
+                      </tr>
+                    </tbody>
+
+                    <tbody>
+                    <tr>
+                    <th>신입생 / 편입생</th>
+                    <td align="left">2.25(월)</td>
+                    </tr>
+                    <tr>
+                    <th>수강변경(전학년)</th>
+                    <td align="left">3.4(월) ~ 3.8(금)</td>
+                    </tr>
+                    </tbody>
+
+
+                    <tbody>
+                    <tr>
+                    <th>4학년</th>
+                    <td align="left">02.11(월)</td>
+                    </tr>
+                    <tr>
+                    <th>3학년</th>
+                    <td align="left">02.12(화)</td>
+                    </tr>
+                    <tr>
+                    <th>2학년</th>
+                    <td align="left">02.13(수)</td>
+                    </tr>
+                    <tr>
+                    <th>1학년</th>
+                    <td align="left">02.14(목)</td>
+                    </tr>
+                    <tr>
+                    <th>전학년</th>
+                    <td align="left">02.15(금)</td>
+                    </tr>
+                    </tbody>
+
+                  </table>
+                </div>
+                <BR/>
+                <! <p><span>※ 학부수강신청 추가일정 ※<br>전학년 <font class="font_red">08.26(월)</font><br>[이용시간:10:00~<font class="font_red">16:00</font>] </span></p> >
+              </div>
+            </div>
+            < /수강신청/변경 일정 >
+            <!-- div login_right -->
+            <div class="login_right">
+			
+<script>
+	  function goSubmit() {
+        if ( !checkInput() )  return;
+
+        document.form1.method="post";
+		document.form1.action="view.php";
+		document.form1.submit();
+      }
+      function checkInput() {
+        if(!document.form1.user_id.value) {
+          alert("ID(학번)를 입력하세요!");
+          document.form1.user_id.focus();
+          return false;
+        } else if(!document.form1.password.value) {
+          alert("PASSWORD(비밀번호)를 입력하세요!");
+          document.form1.password.focus();
+          return false;
+        }
+        return true;
+      }
+</script>
+
+              <h2>이화여자대학교 2020-1학기 학부 수강신청</h2>
+              <div class="login_compo">
+                <p>
+                  <input type="text" class="input_login" name="user_id" size="19.5"  style="width:206px" placeholder="ID(학번)">
+                </p>
+                <p>
+                  <input type="password" class="input_login" name="password" id="password" style="width:206px; margin:7px 0 12px 0;" size="20" placeholder="PASSWORD(비밀번호)">
+                </p>
+                <p>
+                  <a href="#" onClick="goSubmit();">LOGIN</a>
+                  <a href="#" onClick="goFindPwd()">
+                    <br>
+                  </a>
+                </p>
+              </div>
+              <div class="box_blue">
+                <p>
+                  <strong>-
+                    <br/>
+                    &nbsp;&nbsp;강의 수강을 지양하기 바람.</strong>
+                </p>
+                <p>
+                  <strong>[로그아웃(Logout)]을 클릭하십시오.
+                    <br/>
+                    &nbsp;&nbsp;(실습실/PC방 등 공용 PC 사용시 특히 주의요함!!)</strong>
+                </p>
+              </div>
+            </div>
+            <!-- /div login_right -->
+          </div>
+          <!-- /div -->
+        </div>
+        <!-- /div login_wrap -->
+      </form>
+      <!-- /form -->
+    </div>
+    <!-- /div login_page -->
+    <!-- 2019.08.08-->
+    <!--
+    <div class="login_tip">
+    <font size="3"><strong>이번 수강신청기간 [8월5일(월)~8월9일(금)]에 더하여 <font color="red">8월26일(월)에 수강신청을 추가</font>로 할 수 있습니다.</strong></font> <p>
+    </div>
+    -->
+    <!-- 유의사항 -->
+    <div class="login_tip">
+      <h2>/</h2>
+      <ul>
+        <li>
+          <strong>1. 대기 순번 기능&nbsp;&nbsp;
+            <a href="https://youtu.be/4F73f67YPTc" target="_blank">(학부)</a>
+          </strong>
+          <p>
+            <span>.
+              <u>
+                <font class="font_red">(서버 수용 가능 인원 초과 상황)</font>
+                <font class="font_red"></font>
+              </u>
+            </span>
+            <br>
+            <span style="margin-left:20px;">.(
+              <u>
+                <font class="font_red"></font>
+              </u>
+              )</span>
+          </p>
+          <p>
+            <span>. 수강신청 시 늦은 순번의 대기번호가 발급되었다고 해서 ‘새로고침(F5)’을 하거나, 메뉴를 반복 클릭하지 말고 기다려 주십시오.</span>
+            <br>
+            <span style="margin-left:20px;">
+              <u>
+                <font class="font_red">(F5)’ 또는 메뉴 반복 클릭 시 최후 번호로 재발급되어 대기시간이 더 늘어나게 됩니다.</font>
+              </u>
+            </span>
+          <p>
+            <span>.
+              <u>.</u>
+            </span>
+            <br>
+            <span style="margin-left:20px;">
+              <u>. 다시 누를 경우 최후 번호로 재발급되어 대기시간이 더 늘어나게 됩니다.</u>
+              <br>
+              (
+              <u>
+                <font class="font_red">.</font>
+              </u>
+              )</span>
+          </p>
+          <p>
+            <span>. 순번 대기 시 아래와 같은 메시지가 화면에 나타나게 되며,
+              <u>
+                <font class="font_red"></font>
+              </u>
+            </span>
+            <br>
+            <span style="margin-left:20px;">.
+              <br>
+              <img src="/etc/image/netfunnel.png" alt="대기화면 예시">
+            </span>
+          </p>
+        </li>
+        <li>
+          <strong>2.</strong>
+        </li>
+        <li>
+          <strong>3.</strong>
+        </li>
+        <li>
+          <strong>4. 예비수강신청함에 저장되는 과목 수는 학점에 관계없이 15</strong>
+        </li>
+        <li>
+          <strong>5.</strong>
+        </li>
+        <li>
+          <strong>6. 브라우저(Internet Explore) 설정(
+            <u>
+              <font class="font_red"></font>
+            </u>
+            )</strong>
+          <p>
+            <span>(Internet Explore) > 도구(Alt+X) > 인터넷옵션(O) > 일반/검색기록 [설정(S)] > 임시 인터넷 파일에서 [웹 페이지를 열때마다(E)]를 선택 후 [확인]을 클릭합니다.</span>
+            <br>
+            <span style="margin-left:20px;">
+              <img src="/etc/image/explore.png" alt="브라우저 설정">
+            </span>
+          </p>
+        </li>
+        <li>
+          <strong>7. 계정(아이디/패스워드)</strong>
+          <p>
+            <span>
+              <u>
+                <font class="font_red">(아이디와 동일한 비밀번호, 생년월일, 전화번호 등)</font>
+              </u>
+              ,
+              <u>
+                <font class="font_red"></font>
+              </u>
+              .</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+    <!-- /유의사항 -->
+  </body>
+</html>
