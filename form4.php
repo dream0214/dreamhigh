@@ -48,25 +48,43 @@
 	$select_query4 = "SELECT PEOPLENUM1 FROM SUBJECT WHERE NUMBER =". $var1;
 	$select_query5 = "SELECT PEOPLENUM2 FROM SUBJECT WHERE NUMBER =". $var2;
 	$select_query6 = "SELECT PEOPLENUM3 FROM SUBJECT WHERE NUMBER =". $var3;
+	$select_num1 = "SELECT NUM FROM SUBJECT WHERE NUMBER =". $var1;
+	$select_num2 = "SELECT NUM FROM SUBJECT WHERE NUMBER =". $var2;
+	$select_num3 = "SELECT NUM FROM SUBJECT WHERE NUMBER =". $var3;
 	$result4 = mysqli_query($con, $select_query4);
 	$result5 = mysqli_query($con, $select_query5);
 	$result6 = mysqli_query($con, $select_query6);
+	$show1 = mysqli_query($con, $select_num1);
+	$show2 = mysqli_query($con, $select_num2);
+	$show3 = mysqli_query($con, $select_num3);
+	
 	
 	while($info2 = mysqli_fetch_array($result4)){
-		echo '<center>1순위 : '.$info2['PEOPLENUM1'].'</center>';
-		echo '경쟁률 : '
+		echo '<center>1순위 : '.$info2['PEOPLENUM1'].'명</center>';
+		echo "<br>";
+	}
+	while($info3 = mysqli_fetch_array($show1)){
+		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
 
 	while($info2 = mysqli_fetch_array($result5)){
-		echo '<center>2순위 : '.$info2['PEOPLENUM2'].'</center>';
-		echo '경쟁률 : '
+		echo '<center>2순위 : '.$info2['PEOPLENUM2'].'명</center>';
+
 		echo "<br>";
 	}
-
+	while($info3 = mysqli_fetch_array($show2)){
+		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
+		echo "<br>";
+	}
+	
 	while($info2 = mysqli_fetch_array($result6)){
-		echo '<center>3순위 : '.$info2['PEOPLENUM3'].'</center>';
-		echo '경쟁률 : '
+		echo '<center>3순위 : '.$info2['PEOPLENUM3'].'명</center>';
+
+		echo "<br>";
+	}
+	while($info3 = mysqli_fetch_array($show3)){
+		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
 	
