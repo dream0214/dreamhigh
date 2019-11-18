@@ -24,6 +24,11 @@
 	$result2 = mysqli_query($con, $select_basket2);
 	$result3 = mysqli_query($con, $select_basket3);
 	
+	$old_basket1=mysqli_fetch_array($result1);
+	$old_basket2=mysqli_fetch_array($result2);
+	$old_basket3=mysqli_fetch_array($result3);
+	
+	
 	$sql1= "UPDATE INFORMATION SET BASKET1 =". $var1. " WHERE user_id =".$_SESSION['user_id'];
 	$sql2= "UPDATE INFORMATION SET BASKET2 =". $var2. " WHERE user_id =".$_SESSION['user_id'];
 	$sql3= "UPDATE INFORMATION SET BASKET3 =". $var3. " WHERE user_id =".$_SESSION['user_id'];
@@ -33,26 +38,29 @@
 	
 	
 	
-	while($info = mysqli_fetch_array($result1)){
-		if($info['BASKET1']!=$var1){
-			$sql4= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM1 = SUBJECT.PEOPLENUM1 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET1 ";
-			mysqli_query($con, $sql4);
-		}
+
+		if($old_basket1['BASKET1']!=$var1){
+			$sql41= "UPDATE SUBJECT,INFORMATION SET SUBJECT.PEOPLENUM1 = SUBJECT.PEOPLENUM1 - 1 WHERE (SUBJECT.NUMBER = {$old_basket1['BASKET1']}) AND (INFORMATION.user_id =".$_SESSION['user_id']." )" ;
+			mysqli_query($con, $sql41);
+			$sql42= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM1 = SUBJECT.PEOPLENUM1 + 1 WHERE (SUBJECT.NUMBER = INFORMATION.BASKET1) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
+			mysqli_query($con, $sql42);
 		}
 		
-	while($info = mysqli_fetch_array($result2)){
-		if($info['BASKET2']!=$var2){
-			$sql5= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM2 = SUBJECT.PEOPLENUM2 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET2 ";
-			mysqli_query($con, $sql5);
-	}
-		}
-	while($info = mysqli_fetch_array($result3)){
-		if($info['BASKET3']!=$var3){
-		$sql6= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM3 = SUBJECT.PEOPLENUM3 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET3 ";
-		mysqli_query($con, $sql6);
+		if($old_basket2['BASKET2']!=$var2){
 			
-	}
+			$sql51= "UPDATE SUBJECT,INFORMATION SET SUBJECT.PEOPLENUM2 = SUBJECT.PEOPLENUM2 - 1 WHERE (SUBJECT.NUMBER = {$old_basket2['BASKET2']}) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
+			mysqli_query($con, $sql51);
+			$sql52= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM2 = SUBJECT.PEOPLENUM2 + 1 WHERE (SUBJECT.NUMBER = INFORMATION.BASKET2) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
+			mysqli_query($con, $sql52);
 		}
+	
+		if($old_basket3['BASKET3']!=$var3){		
+			$sql61= "UPDATE SUBJECT,INFORMATION SET SUBJECT.PEOPLENUM3 = SUBJECT.PEOPLENUM3 - 1 WHERE (SUBJECT.NUMBER = {$old_basket3['BASKET3']}) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
+			mysqli_query($con, $sql61);
+			$sql62= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM3 = SUBJECT.PEOPLENUM3 + 1 WHERE (SUBJECT.NUMBER = INFORMATION.BASKET3) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
+			mysqli_query($con, $sql62);
+		}
+	
 			
 	mysqli_close($con);
 ?>
@@ -92,7 +100,11 @@
 		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
-
+	?>
+		  <input type='button' 
+         value='수강신청' 
+         onclick='alert("수강신청 성공!.")'/>
+<?php
 	while($info2 = mysqli_fetch_array($result5)){
 		echo '<center>2순위 : '.$info2['PEOPLENUM2'].'명</center>';
 
@@ -102,6 +114,12 @@
 		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
+	?>
+	  <input type='button' 
+         value='수강신청' 
+         onclick='alert("수강신청 성공!.")'/>
+	
+	<?php
 	
 	while($info2 = mysqli_fetch_array($result6)){
 		echo '<center>3순위 : '.$info2['PEOPLENUM3'].'명</center>';
@@ -112,14 +130,18 @@
 		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
+		mysqli_close($con);
+	?>
 	
-	mysqli_close($con);
-?>
+		  <input type='button' 
+         value='수강신청' 
+         onclick='alert("수강신청 성공!.")'/>
+
 
 
 
 <br><br>
-<input  type="submit" value="재검색">
+
 </form>
 </body>
 </html>
