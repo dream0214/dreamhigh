@@ -16,19 +16,44 @@
 <?php
     $con=mysqli_connect("localhost","root","","sugangdream")
 	or die("접속 실패");
+	$select_basket1 = "SELECT BASKET1 FROM INFORMATION WHERE user_id =".$_SESSION['user_id'];
+	$select_basket2 = "SELECT BASKET2 FROM INFORMATION WHERE user_id =".$_SESSION['user_id'];
+	$select_basket3 = "SELECT BASKET3 FROM INFORMATION WHERE user_id =".$_SESSION['user_id'];
+
+	$result1 = mysqli_query($con, $select_basket1);
+	$result2 = mysqli_query($con, $select_basket2);
+	$result3 = mysqli_query($con, $select_basket3);
+	
 	$sql1= "UPDATE INFORMATION SET BASKET1 =". $var1. " WHERE user_id =".$_SESSION['user_id'];
 	$sql2= "UPDATE INFORMATION SET BASKET2 =". $var2. " WHERE user_id =".$_SESSION['user_id'];
 	$sql3= "UPDATE INFORMATION SET BASKET3 =". $var3. " WHERE user_id =".$_SESSION['user_id'];
 	mysqli_query($con, $sql1);
 	mysqli_query($con, $sql2);
 	mysqli_query($con, $sql3);
-
-	$sql4= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM1 = SUBJECT.PEOPLENUM1 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET1 ";
-	$sql5= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM2 = SUBJECT.PEOPLENUM2 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET2 ";
-	$sql6= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM3 = SUBJECT.PEOPLENUM3 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET3 ";
-	mysqli_query($con, $sql4);
-	mysqli_query($con, $sql5);
-	mysqli_query($con, $sql6);
+	
+	
+	
+	while($info = mysqli_fetch_array($result1)){
+		if($info['BASKET1']!=$var1){
+			$sql4= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM1 = SUBJECT.PEOPLENUM1 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET1 ";
+			mysqli_query($con, $sql4);
+		}
+		}
+		
+	while($info = mysqli_fetch_array($result2)){
+		if($info['BASKET2']!=$var2){
+			$sql5= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM2 = SUBJECT.PEOPLENUM2 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET2 ";
+			mysqli_query($con, $sql5);
+	}
+		}
+	while($info = mysqli_fetch_array($result3)){
+		if($info['BASKET3']!=$var3){
+		$sql6= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM3 = SUBJECT.PEOPLENUM3 + 1 WHERE SUBJECT.NUMBER = INFORMATION.BASKET3 ";
+		mysqli_query($con, $sql6);
+			
+	}
+		}
+			
 	mysqli_close($con);
 ?>
 
@@ -94,7 +119,7 @@
 
 
 <br><br>
-<input  type="submit" value="검색">
+<input  type="submit" value="재검색">
 </form>
 </body>
 </html>
