@@ -2,6 +2,8 @@
 <title>로그인 실패</title>
 <body>
 <center>
+
+
 <?php
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$conn=mysqli_connect("localhost","root","","sugangdream");
@@ -9,8 +11,13 @@
 			die("Connection failed : ".mysqli_connect_error());
 		}
 		$password=$_POST["password"];
-		$sql="SELECT password FROM INFORMATION WHERE user_id='".$_POST["user_id"]."'";
-		$result=mysqli_query($conn,$sql);
+		$stmt=$conn->stmt_init();
+		$stmt=$conn->prepare("SELECT password FROM INFORMATION WHERE user_id=?");
+		$stmt->bind_param("s",$_POST["user_id"]);
+		$stmt->execute();
+		$result=$stmt->get_result();
+		
+
 		if($result){
 			while ($row=mysqli_fetch_array($result)){
 				if($row["password"]==hash('sha512',"$password")){
@@ -31,12 +38,13 @@
 				등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.</FONT>";
 				?>
 				<br>
-				<a href="test.html">로그인하기</a>
+				<a href="test2.html">로그인하기</a>
 				<?php
 			}
 		} else{
 			echo "Result Failed";
 		}
+		$stmt->close();
 		mysqli_close($conn);
 	}
 ?>

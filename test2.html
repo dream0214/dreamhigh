@@ -95,7 +95,7 @@
 <script>
 	  function goSubmit() {
         if ( !checkInput() )  return;
-
+	  <!-- document.form1.password.value = SHA2('document.form1.password.value',512)); -->
         document.form1.method="post";
 		document.form1.action="view.php";
 		document.form1.submit();
@@ -112,21 +112,23 @@
         }
         return true;
       }
+	  
 </script>
 
               <h2>이화여자대학교 2020-1학기 학부 수강신청</h2>
               <div class="login_compo">
                 <p>
-                  <input type="text" class="input_login" name="user_id" size="19.5"  style="width:206px" placeholder="ID(학번)">
+                  <input type="text" class="input_login" name="user_id" size="19.5" 
+				  style="width:206px" placeholder="ID(학번)">
                 </p>
                 <p>
-                  <input type="password" class="input_login" name="password" id="password" style="width:206px; margin:7px 0 12px 0;" size="20" placeholder="PASSWORD(비밀번호)">
+                  <input type="password" class="input_login" name="password" size="20"
+				  id="password" style="width:206px; margin:7px 0 12px 0;"  placeholder="PASSWORD(비밀번호)">
                 </p>
                 <p>
-                  <a href="#" onClick="goSubmit();">LOGIN</a>
-                  <a href="#" onClick="goFindPwd()">
-                    <br>
-                  </a>
+				
+                  <a href="#" onClick=" goSubmit();">LOGIN</a>
+ 
                 </p>
               </div>
               <div class="box_blue">

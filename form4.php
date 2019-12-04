@@ -7,64 +7,93 @@
 	}
 ?>
 
+<html>
+<head>
+<title></title>
+<script>
+var tid;
+var cnt = parseInt(3600);//초기값(초단위)
+function counter_init() {
+	tid = setInterval("counter_run()", 1000);
+}
+
+function counter_reset() {
+	clearInterval(tid);
+	cnt = parseInt(3600);
+	counter_init();
+}
+
+function counter_run() {
+	document.all.counter.innerText = time_format(cnt);
+	cnt--;
+	if(cnt < 0) {
+		clearInterval(tid);
+		self.location = "logout.php";
+	}
+}
+function time_format(s) {
+	var nHour=0;
+	var nMin=0;
+	var nSec=0;
+	if(s>0) {
+		nMin = parseInt(s/60);
+		nSec = s%60;
+
+		if(nMin>60) {
+			nHour = parseInt(nMin/60);
+			nMin = nMin%60;
+		}
+	} 
+	if(nSec<10) nSec = "0"+nSec;
+	if(nMin<10) nMin = "0"+nMin;
+
+	return ""+nHour+":"+nMin+":"+nSec;
+}
+</script>
+</head>
+
+<body>
+<span id="counter"> </span> 후 자동로그아웃 <input type="button" value="연장" onclick="counter_reset()">
+</body>
+</html>
+
+<script>
+counter_init();
+</script>
+
+
+
 <?php
-	$var1 = $_POST["ONE"];
-	$var2 = $_POST["TWO"];
-	$var3 = $_POST["THREE"];
+   $var1 = $_POST["ONE"];
+   $var2 = $_POST["TWO"];
+   $var3 = $_POST["THREE"];
+   $var1 = my_classnum($var1);
+   $var2 = my_classnum($var2);
+   $var3 = my_classnum($var3);
+   check($var1,$var2,$var3);
+   function my_classnum($x)
+   {     
+         if(($x>=38970)&&($x<=38994)){                     
+               return $x;
+         }
+      else
+      {
+         echo"<script>alert('정확한 학수번호를 입력하세요.')</script>"; 
+         echo ("<meta http-equiv='refresh' content='0; URL=form3.php'>"); 
+         exit;
+      }     
+   }
+   function check($x,$y,$z)
+   {
+      if($x==$y||$y==$z||$z==$x)
+         
+         {
+         echo"<script>alert('서로 다른 학수번호를 입력해주세요.')</script>"; 
+         echo ("<meta http-equiv='refresh' content='0; URL=form3.php'>"); 
+         exit;
+         }
+   }
 ?>
-
-<?php
-    $con=mysqli_connect("localhost","root","","sugangdream")
-	or die("접속 실패");
-	$select_basket1 = "SELECT BASKET1 FROM INFORMATION WHERE user_id =".$_SESSION['user_id'];
-	$select_basket2 = "SELECT BASKET2 FROM INFORMATION WHERE user_id =".$_SESSION['user_id'];
-	$select_basket3 = "SELECT BASKET3 FROM INFORMATION WHERE user_id =".$_SESSION['user_id'];
-
-	$result1 = mysqli_query($con, $select_basket1);
-	$result2 = mysqli_query($con, $select_basket2);
-	$result3 = mysqli_query($con, $select_basket3);
-	
-	$old_basket1=mysqli_fetch_array($result1);
-	$old_basket2=mysqli_fetch_array($result2);
-	$old_basket3=mysqli_fetch_array($result3);
-	
-	
-	$sql1= "UPDATE INFORMATION SET BASKET1 =". $var1. " WHERE user_id =".$_SESSION['user_id'];
-	$sql2= "UPDATE INFORMATION SET BASKET2 =". $var2. " WHERE user_id =".$_SESSION['user_id'];
-	$sql3= "UPDATE INFORMATION SET BASKET3 =". $var3. " WHERE user_id =".$_SESSION['user_id'];
-	mysqli_query($con, $sql1);
-	mysqli_query($con, $sql2);
-	mysqli_query($con, $sql3);
-	
-	
-	
-
-		if($old_basket1['BASKET1']!=$var1){
-			$sql41= "UPDATE SUBJECT,INFORMATION SET SUBJECT.PEOPLENUM1 = SUBJECT.PEOPLENUM1 - 1 WHERE (SUBJECT.NUMBER = {$old_basket1['BASKET1']}) AND (INFORMATION.user_id =".$_SESSION['user_id']." )" ;
-			mysqli_query($con, $sql41);
-			$sql42= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM1 = SUBJECT.PEOPLENUM1 + 1 WHERE (SUBJECT.NUMBER = INFORMATION.BASKET1) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
-			mysqli_query($con, $sql42);
-		}
-		
-		if($old_basket2['BASKET2']!=$var2){
-			
-			$sql51= "UPDATE SUBJECT,INFORMATION SET SUBJECT.PEOPLENUM2 = SUBJECT.PEOPLENUM2 - 1 WHERE (SUBJECT.NUMBER = {$old_basket2['BASKET2']}) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
-			mysqli_query($con, $sql51);
-			$sql52= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM2 = SUBJECT.PEOPLENUM2 + 1 WHERE (SUBJECT.NUMBER = INFORMATION.BASKET2) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
-			mysqli_query($con, $sql52);
-		}
-	
-		if($old_basket3['BASKET3']!=$var3){		
-			$sql61= "UPDATE SUBJECT,INFORMATION SET SUBJECT.PEOPLENUM3 = SUBJECT.PEOPLENUM3 - 1 WHERE (SUBJECT.NUMBER = {$old_basket3['BASKET3']}) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
-			mysqli_query($con, $sql61);
-			$sql62= "UPDATE SUBJECT, INFORMATION SET SUBJECT.PEOPLENUM3 = SUBJECT.PEOPLENUM3 + 1 WHERE (SUBJECT.NUMBER = INFORMATION.BASKET3) AND (INFORMATION.user_id =".$_SESSION['user_id']." )";
-			mysqli_query($con, $sql62);
-		}
-	
-			
-	mysqli_close($con);
-?>
-
 
 
 <html>
@@ -76,20 +105,45 @@
 <form method="post" action="form4.php"><br>
 
 <?php
-    $con=mysqli_connect("localhost","root","","sugangdream")
+    $conn=mysqli_connect("localhost","root","","sugangdream")
 	or die("접속 실패");
-	$select_query4 = "SELECT PEOPLENUM1 FROM SUBJECT WHERE NUMBER =". $var1;
-	$select_query5 = "SELECT PEOPLENUM2 FROM SUBJECT WHERE NUMBER =". $var2;
-	$select_query6 = "SELECT PEOPLENUM3 FROM SUBJECT WHERE NUMBER =". $var3;
-	$select_num1 = "SELECT NUM FROM SUBJECT WHERE NUMBER =". $var1;
-	$select_num2 = "SELECT NUM FROM SUBJECT WHERE NUMBER =". $var2;
-	$select_num3 = "SELECT NUM FROM SUBJECT WHERE NUMBER =". $var3;
-	$result4 = mysqli_query($con, $select_query4);
-	$result5 = mysqli_query($con, $select_query5);
-	$result6 = mysqli_query($con, $select_query6);
-	$show1 = mysqli_query($con, $select_num1);
-	$show2 = mysqli_query($con, $select_num2);
-	$show3 = mysqli_query($con, $select_num3);
+	
+	$stmt1=$conn->stmt_init();
+	$stmt1=$conn->prepare("SELECT PEOPLENUM1 FROM SUBJECT WHERE NUMBER =?");
+	$stmt1->bind_param("s",$var1);
+	$stmt1->execute();
+	$result4=$stmt1->get_result();
+	
+	$stmt2=$conn->stmt_init();
+	$stmt2=$conn->prepare("SELECT PEOPLENUM2 FROM SUBJECT WHERE NUMBER =?");
+	$stmt2->bind_param("s",$var2);
+	$stmt2->execute();
+	$result5=$stmt2->get_result();
+	
+	$stmt3=$conn->stmt_init();
+	$stmt3=$conn->prepare("SELECT PEOPLENUM3 FROM SUBJECT WHERE NUMBER =?");
+	$stmt3->bind_param("s",$var3);
+	$stmt3->execute();
+	$result6=$stmt3->get_result();
+	
+	$stmt4=$conn->stmt_init();
+	$stmt4=$conn->prepare("SELECT NUM FROM SUBJECT WHERE NUMBER =?");
+	$stmt4->bind_param("s",$var1);
+	$stmt4->execute();
+	$show1=$stmt4->get_result();
+	
+	$stmt5=$conn->stmt_init();
+	$stmt5=$conn->prepare("SELECT NUM FROM SUBJECT WHERE NUMBER =?");
+	$stmt5->bind_param("s",$var2);
+	$stmt5->execute();
+	$show2=$stmt5->get_result();
+	
+	$stmt6=$conn->stmt_init();
+	$stmt6=$conn->prepare("SELECT NUM FROM SUBJECT WHERE NUMBER =?");
+	$stmt6->bind_param("s",$var3);
+	$stmt6->execute();
+	$show3=$stmt6->get_result();
+	
 	
 	
 	while($info2 = mysqli_fetch_array($result4)){
@@ -130,7 +184,14 @@
 		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
-		mysqli_close($con);
+		$stmt1->close();
+		$stmt2->close();
+		$stmt3->close();
+		$stmt4->close();
+		$stmt5->close();
+		$stmt6->close();
+		
+		mysqli_close($conn);
 	?>
 	
 		  <input type='button' 

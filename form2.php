@@ -8,6 +8,16 @@
 ?>
 
 <?php
+	$key_name = 'nameefghijklmnopqrstuvwxyz1234';
+	$key_number = 'numberfghijklmnopqrstuvwxyz5678';
+	
+	function AES_Decode($base64_text,$key)
+	{
+		return openssl_decrypt(base64_decode($base64_text), "aes-256-cbc", $key, true, str_repeat(chr(0), 16));
+	}
+?>
+
+<?php
     $con=mysqli_connect("localhost","root","","sugangdream")
 	or die("접속 실패");
 	$select_query1 = "SELECT MAJOR FROM INFORMATION WHERE user_id =".$_SESSION['user_id'];
@@ -22,11 +32,13 @@
 	}
 
 	while($info = mysqli_fetch_array($result2)){
-		echo '학번 : '.$info['user_id'];
+		$number=AES_Decode($info['number'],$key_number);
+		echo '학번 : '.$number;
 		echo "<br>";
 	}
 
 	while($info = mysqli_fetch_array($result3)){
+		$name=AES_Decode($info['name'],$key_name);
 		echo '이름 : '.$info['NAME'];
 		echo "<br>";
 	}
