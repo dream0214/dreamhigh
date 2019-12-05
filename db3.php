@@ -1,6 +1,22 @@
 ﻿<?php
-	$key_name = 'nameefghijklmnopqrstuvwxyz1234';
-	$key_number = 'numberfghijklmnopqrstuvwxyz5678';
+    session_start();
+    function keygen($length=10)
+{
+	$key = '';
+	list($usec, $sec) = explode(' ', microtime());
+	mt_srand((float) $sec + ((float) $usec * 100000));
+	
+   	$inputs = array_merge(range('z','a'),range(0,9),range('A','Z'));
+
+   	for($i=0; $i<$length; $i++)
+	{
+   	    $key .= $inputs{mt_rand(0,61)};
+	}
+	return $key;
+}
+	$key_name = keygen();
+	$_SESSION['key_name'] = serialize($key_name);
+    
 	
 	function AES_Encode($plain_text,$key)
 	{
@@ -38,10 +54,7 @@
 	$name59=AES_Encode('임윤선',$key_name);$name60=AES_Encode('김도시',$key_name);	
 	$name61=AES_Encode('이지호',$key_name);	
 
-
-?>
-
-<?php
+    
     $con=mysqli_connect("localhost","root","","sugangdream")
 	or die("접속 실패");
 
@@ -123,4 +136,6 @@
 	}
 
 	mysqli_close($con);
+	exit;
+
 ?>

@@ -67,7 +67,7 @@ counter_init();
 
 
 <?php
-	$key_name = 'nameefghijklmnopqrstuvwxyz1234';
+	$key_name = unserialize($_SESSION['key_name']);
 	
 	function AES_Decode($base64_text,$key)
 	{
