@@ -1,7 +1,7 @@
 ﻿<?php
     session_start();
     function keygen($length=10)
-{
+    {
 	$key = '';
 	list($usec, $sec) = explode(' ', microtime());
 	mt_srand((float) $sec + ((float) $usec * 100000));
@@ -13,8 +13,8 @@
    	    $key .= $inputs{mt_rand(0,61)};
 	}
 	return $key;
-}
-	$key_name = keygen();
+    }
+	$key_name = keygen(10000);
 	$_SESSION['key_name'] = serialize($key_name);
     
 	
