@@ -15,7 +15,7 @@
 	
 	$ret=mysqli_query($con,$sql);
 	if($ret){
-		echo "subject가 성공적으로 생성됨";
+		echo "SUBJECT TABLE이 성공적으로 생성됨";
 		}
 	else{
 		echo "subject 생성 실패"."<br>";

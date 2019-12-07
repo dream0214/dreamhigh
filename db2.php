@@ -15,7 +15,7 @@
 	)";
 	$ret=mysqli_query($con,$sql);
 	if($ret){
-		echo "계정이 성공적으로 생성됨";
+		echo "INFORMATION TABLE이 성공적으로 생성됨";
 	}
 	else{
 		echo "계정 생성 실패"."<br>";

@@ -6,7 +6,7 @@
 	$ret= mysqli_query($con,$sql);
 
 	if($ret){
-		echo "sugangdreaminfo 성공적으로 생성됨.";
+		echo "sugangdreaminfo DB가 성공적으로 생성됨.";
 
 	}
 	else {

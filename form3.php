@@ -15,14 +15,14 @@
 <title></title>
 <script>
 var tid;
-var cnt = parseInt(3600);//초기값(초단위)
+var cnt = parseInt(1800);//초기값(초단위)
 function counter_init() {
 	tid = setInterval("counter_run()", 1000);
 }
 
 function counter_reset() {
 	clearInterval(tid);
-	cnt = parseInt(3600);
+	cnt = parseInt(1800);
 	counter_init();
 }
 
@@ -59,10 +59,10 @@ function time_format(s) {
 <span id="counter"> </span> 후 자동로그아웃 <input type="button" value="연장" onclick="counter_reset()">
 </body>
 </html>
-
 <script>
 counter_init();
 </script>
+
 
 
 

@@ -37,7 +37,7 @@
 	
 	$ret=mysqli_query($con,$sql);
 	if($ret){
-		echo "데이터베이스를 성공적으로 입력됨";
+		echo "SUBJECT에 정보가 성공적으로 입력됨";
 		}
 	else{
 		echo "데이터 입력 실패"."<br>";

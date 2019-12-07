@@ -115,7 +115,7 @@
    ";
 	$ret= mysqli_query($con,$sql);
 	if($ret){
-		echo "데이터베이스를 성공적으로 생성";
+		echo "INFORMATION에 정보가 입력됨";
 	}
 	else {
 		echo "데이터베이스 생성 실패"."<br>";
