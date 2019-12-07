@@ -200,10 +200,10 @@ counter_init();
 	}
 		}
 	catch (IllegalArgumentException $e){
-		echo '오류입니다';
+		echo '의도하지 않은 매개변수입니다';
 	}
 	catch(NullPointerException $e){
-		echo '오류입니다';
+		echo '변수값이 Null입니다';
 	}
 		$stmt1->close();
 		$stmt2->close();
