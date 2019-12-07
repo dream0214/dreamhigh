@@ -16,13 +16,11 @@ var cnt = parseInt(3600);//초기값(초단위)
 function counter_init() {
 	tid = setInterval("counter_run()", 1000);
 }
-
 function counter_reset() {
 	clearInterval(tid);
 	cnt = parseInt(3600);
 	counter_init();
 }
-
 function counter_run() {
 	document.all.counter.innerText = time_format(cnt);
 	cnt--;
@@ -38,7 +36,6 @@ function time_format(s) {
 	if(s>0) {
 		nMin = parseInt(s/60);
 		nSec = s%60;
-
 		if(nMin>60) {
 			nHour = parseInt(nMin/60);
 			nMin = nMin%60;
@@ -46,7 +43,6 @@ function time_format(s) {
 	} 
 	if(nSec<10) nSec = "0"+nSec;
 	if(nMin<10) nMin = "0"+nMin;
-
 	return ""+nHour+":"+nMin+":"+nSec;
 }
 </script>
@@ -145,8 +141,8 @@ counter_init();
 	$show3=$stmt6->get_result();
 	
 	
-	
-	while($info2 = mysqli_fetch_array($result4)){
+	try{
+		while($info2 = mysqli_fetch_array($result4)){
 		echo '<center>1순위 : '.$info2['PEOPLENUM1'].'명</center>';
 		echo "<br>";
 	}
@@ -154,35 +150,60 @@ counter_init();
 		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
-	?>
-		  <input type='button' 
+			}
+	catch (IllegalArgumentException $e){
+		echo '의도하지 않은 매개변수입니다';
+	}
+	catch(NullPointerException $e){
+		echo '변수값이 Null입니다';
+	}
+?>
+		<input type='button' 
          value='수강신청' 
          onclick='alert("수강신청 성공!.")'/>
+
+	 
+	  
 <?php
+	try{
 	while($info2 = mysqli_fetch_array($result5)){
 		echo '<center>2순위 : '.$info2['PEOPLENUM2'].'명</center>';
-
 		echo "<br>";
+
 	}
 	while($info3 = mysqli_fetch_array($show2)){
 		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
 	}
-	?>
+		}
+	catch (IllegalArgumentException $e){
+		echo '의도하지 않은 매개변수입니다';
+	}
+	catch(NullPointerException $e){
+		echo '변수값이 Null입니다';
+	}
+?>
 	  <input type='button' 
          value='수강신청' 
          onclick='alert("수강신청 성공!.")'/>
-	
-	<?php
-	
+
+
+<?php
+	try{
 	while($info2 = mysqli_fetch_array($result6)){
 		echo '<center>3순위 : '.$info2['PEOPLENUM3'].'명</center>';
-
 		echo "<br>";
 	}
 	while($info3 = mysqli_fetch_array($show3)){
 		echo '<center>인원제한 : '.$info3['NUM'].'명</center>';
 		echo "<br>";
+	}
+		}
+	catch (IllegalArgumentException $e){
+		echo '오류입니다';
+	}
+	catch(NullPointerException $e){
+		echo '오류입니다';
 	}
 		$stmt1->close();
 		$stmt2->close();
