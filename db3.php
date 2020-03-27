@@ -26,7 +26,7 @@
 	$name35=AES_Encode('채기준',$key_name);$name36=AES_Encode('이상호',$key_name);
 	$name37=AES_Encode('이향숙',$key_name);$name38=AES_Encode('최병주',$key_name);
 	$name39=AES_Encode('엄기준',$key_name);$name40=AES_Encode('하정우',$key_name);
-	$name41=AES_Encode('정둘임',$key_name);$name42=AES_Encode('김범준',$key_name);
+	$name41=AES_Encode('정셋임',$key_name);$name42=AES_Encode('김범준',$key_name);
 	$name43=AES_Encode('김영준',$key_name);$name44=AES_Encode('박현석',$key_name);
 	$name45=AES_Encode('이형준',$key_name);$name46=AES_Encode('김명',$key_name);
 	$name47=AES_Encode('이미정',$key_name);$name48=AES_Encode('천지영',$key_name);
